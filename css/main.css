@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import 'vsColors.css';
+:root {
+
+    }
+
+*e {
+    border: var(--VSEditorPink);
+    border-style: solid;
+}
+body {  
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: var(--VSSidebar);
+}
+a {
+    text-decoration: none;
+    color: inherit
+}
+.top {
+    background-color: var(--VSEditor);
+    color: var(--VSExplorerGitGreen);
+    text-align: center;
+    padding: 10vh 0 0 0;
+    height: 80vh;
+}
+.top h1 {
+    font-size: 5em;
+}
+
+.top img {
+    height: 50vh;
+    padding: 0 0 5vh 0;
+}
+.bottom {
+    text-align: center;
+    padding: 5em 1em 1em 1em;
+    color: var(--VSExplorerTextGrey);
+    height: 85vh;
+}

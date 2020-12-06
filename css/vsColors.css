@@ -1,0 +1,57 @@
+:root {
+    --VSToolbar:#2c2c2c;
+    --VSToolbarText:#777777;
+
+    --VSSidebar:#303030;
+    --VSSidebarIconGrey:#858585;
+
+    --VSExplorer:#202021;
+    --VSExplorerHeading:#bcbcbc;
+    --VSExplorerTextWhite:#cdcdcd;
+    --VSExplorerLink:#3596ff;
+    --VSExplorerGitGreen:#5fa276;
+    --VSExplorerGitRed:#a04131;
+    --VSExplorerTextGreen:#74ca92;
+    --VSExplorerTextRed:#f98171;
+    --VSExplorerEmphasised:#426650;
+    --VsExplorerProblem:#c46a5d;
+    --VSExplorerTextGrey:#9a9a9b;
+
+
+    --VSBlue:#007bcd;
+
+    --VSTopToolbar:#202021;
+    --VSTopToolbarIcon:#929293;
+
+    --VSTabTextUnselected:#979797;
+    --VSTab:#292929;
+    --VSTabIconBlue:#509bbb;
+    --VSTabIconPink:#a175c5;
+    --VSTabIconOrange:#e47a2f;
+    --VSTabIconOkka:#ef9f23;
+    --VSTabIconGreen:#8ec247;
+    --VSTabIconYellow:#cccc3f;
+    --VSTabIconRed:#cd3b42;
+    --VSIconGrey:#4c595e;
+    --VSIconWhite:#a6a8a7;
+
+    --VSEditor:#181818;
+    --VSEditorPath:#aaaaaa;
+    --VSEditorText:#d5d5d5;
+    --VSEditorLineNumber:#868686;
+    --VSEditorLine:#717171;
+    --VSEditorLineUnselected:#3e3e3e;
+    --VSEditorBlue:#559dd7;
+    --VSEditorPink:#c687c2;
+    --VSEditorYellow:#ddddac;
+    --VSEditorOrange:#cf9279;
+    --VSEditorOcca:#d8bc7e;
+    --VSEditorLightGreen:#b6cfa9;
+    --VSEditorLightBlue:#9eddfe;
+    --VSEditorGreen:#6b9a54;
+    --VSEditorTurquoise:#4dcab2;
+    --VSEditorLightbulb:#ffcd00;
+    --VSEditorError:#f48872;
+    --VSEditorRed:#f54546;
+    --VSEditorOverviewDarkRed:#6e1316;
+}
