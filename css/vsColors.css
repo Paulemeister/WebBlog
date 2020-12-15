@@ -17,8 +17,8 @@
     --VsExplorerProblem:#c46a5d;
     --VSExplorerTextGrey:#9a9a9b;
 
-
     --VSBlue:#007bcd;
+    --VSOrange:#ce662f;
 
     --VSTopToolbar:#202021;
     --VSTopToolbarIcon:#929293;
@@ -54,4 +54,10 @@
     --VSEditorError:#f48872;
     --VSEditorRed:#f54546;
     --VSEditorOverviewDarkRed:#6e1316;
+
+    --VSDebuggerBlue:#76c0ff;
+    --VSDebuggerGreen:#8bd286;
+    --VSDebuggerRed:#f48872;
+    --VSDebuggerGrey:#7d7d7d;
+    --VSDebuggerBarGrey:var(--VSSidebar);
 }

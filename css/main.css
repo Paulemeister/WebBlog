@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import 'vsColors.css';
-:root {
 
-    }
-
-*e {
-    border: var(--VSEditorPink);
-    border-style: solid;
+* {
+    /*border: var(--VSTabIconPink);
+    border-style: solid;*/
+    
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0
+    
 }
 body {  
     font-family: 'Roboto', sans-serif;
     margin: 0;
     background-color: var(--VSSidebar);
+    color: var(--VSExplorerTextGrey)
 }
 a {
     text-decoration: none;
