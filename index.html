@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shitty Website</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
+    <div class=navigation></div>
     <div class="top">
         <img src="resources/logo.svg" alt="A Fucking Triangle">
         <h1>Pauls Shitty Website</h1>
@@ -17,4 +19,10 @@
             <a href="test.html"><h2>Test</h2></a>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $(".navigation").load("blocks/navigation.html");
+        });
+    </script>
 </html>
