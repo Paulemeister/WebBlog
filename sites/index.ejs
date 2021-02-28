@@ -15,14 +15,9 @@
     </div>
     <div class="bottom">
         <div class="links">
-            <a href="info.html"><h2>Info</h2></a>
-            <a href="test.html"><h2>Test</h2></a>
+            <a href="/info"><h2>Info</h2></a>
+            <a href="/test"><h2>Test</h2></a>
         </div>
     </div>
-
-    <script>
-        $(function () {
-            $(".navigation").load("blocks/navigation.html");
-        });
-    </script>
+    <%- include("../blocks/navigation.ejs") %> 
 </html>
