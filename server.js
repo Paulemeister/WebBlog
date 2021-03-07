@@ -5,22 +5,23 @@ const path = require("path");
 const ejs = require("ejs");
 const marked = require("marked");
 const mariadb = require("mariadb/callback");
+const util = require("util")
 
 const db = require("./mariadb.js");
 config = require("./config.js");
 
 const paths = {
-    "/": "/index.html",
-    "/info": "/info.html",
-    "/md": "/test.md"
+    "": "index.html",
+    "info": "info.html",
+    "md": "test.md"
 }
 
-
+db.pool.query = util.promisify(db.pool.query);
 
 const requestListener = function (request, response) {
     console.log(request.url);
     let url = new URL(request.url,"http://127.0.0.1:8080");
-    let pathname = url.pathname;
+    let pathname = url.pathname.substring(1);
     let dirname = "";
     let contentType = "";
     console.log("Requested:", pathname);
@@ -31,24 +32,24 @@ const requestListener = function (request, response) {
         if (pathname in paths) {
             pathname = paths[pathname];
         }
-        let extension = path.extname(pathname.substring(1));
+        let extension = path.extname(pathname);
         if (extension == ""){extension=".html";pathname+=extension};
         console.log("Extension",extension);
-        console.log("Serving:", pathname.substring(1))
+        console.log("Serving:", pathname)
 
         if (extension== ".html"){
-            dirname = "./cache/"+pathname.substring(1);
+            dirname = "./cache/"+pathname;
             contentType = "text/html; charset=UTF-8"
             if (!fs.existsSync(dirname)){
-                renderPage(pathname.substring(1));
+                renderPage(pathname);
             }
         }
         else if (extension == ".css"){
-            dirname = pathname.substring(1)
+            dirname = pathname
             contentType = "text/css; charset=UTF-8";
         }
         else {
-            dirname = pathname.substring(1)
+            dirname = pathname
             contentType = "";
         }
         
@@ -79,6 +80,10 @@ const requestListener = function (request, response) {
             //4
             let result = qs.parse(data.toString());
             console.log(result);
+            
+            url = result.heading.replace(/[;/?:@&=+$, ]/g ,"-")
+            db.pool.query("insert into BlogEntries (heading,url,content) values ((?),(?),(?));",[result.heading,url,result.content]);
+            response.writeHead(302,{Location: "/new"})
         });
         //2
         request.on("end",function(){
@@ -91,24 +96,25 @@ const requestListener = function (request, response) {
     //never executes
 }
 
-function renderPage(pathname) {
+async function renderPage(pathname) {
     let html = "This Page is empty. Maybe it didn't render?";
     let name =pathname.split(".")[0];
     let subpath = path.dirname(name);
     let ejspath = "./sites/"+name +".ejs";
+    let variables = {};
     console.log("rendering ./sites/"+name +".ejs")
 
-    if (name.startsWith("articles/")){
-        let dbdata = renderBlogPage(name.replace("articles/",""));
+    if (name.startsWith("blog/")){
+        let dbdata = await renderBlogPage(name.replace("blog/",""));
         if(dbdata !== false){
-            let bloghtml = dbdata["html"];
-            let heading = dbdata["heading"];
-            ejspath = "./sites/articles.ejs";
+            variables.bloghtml = dbdata["html"];
+            variables.heading = dbdata["heading"];
+            ejspath = "./sites/blogEntry.ejs";
         }
     }
     try {
         let contents =fs.readFileSync(ejspath);
-        html = ejs.render(contents.toString(),null,{filename: ejspath});//{views:["./"]});
+        html = ejs.render(contents.toString(),variables,{filename: ejspath});//{views:["./"]});
     }
     catch (error) {
         console.error(error);
@@ -133,32 +139,25 @@ function renderPage(pathname) {
     return true;
 }
 
-function renderBlogPage(blogEntry) {
+async function renderBlogPage(blogEntry) {
     let content = "";
     let author = "";
     let heading = "";
-    console.log("test")
-    db.pool.query("select * from BlogEntries where url=(?);",[blogEntry],(err,rows,meta)=>{
-        console.log("inside")
-        if (err){
-            console.log(err.message);
-        }
-        else{
-            console.log(rows.length);
-            if (rows.length== 1){
-                content=rows[0]["content"];
-                author = rows[0]["author"];
-                heading = rows[0]["heading"];
-                
-            }
-            else{
-                console.log("DB Error: got weird amount of rows")
-                return false;
-            }
-        }
-    });
-    return {html:marked(content),author: author,heading:heading};
+    let html = "";
+    let rows = await db.pool.query("select * from BlogEntries where url=(?);",[blogEntry]);
+    if (rows.length== 1){
+        content=rows[0]["content"];
+        author = rows[0]["author"];
+        heading = rows[0]["heading"];
+    }
+    else{
+        return false;
+    }
+    //console.log("DB:",blogEntry,rows);
+    html = marked(content);
+    return {html:html,author: author,heading:heading};
 }
 
 const server = http.createServer(requestListener);
 server.listen(config.port);
+console.log("Server Started\nIP: localhost\nPort:",config.port);

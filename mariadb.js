@@ -1,5 +1,6 @@
 const config = require("./config.js");
 const mariadb = require("mariadb/callback");
+const util = require("util")
 
 const pool = mariadb.createPool({
     host: config.db_host,
@@ -9,7 +10,9 @@ const pool = mariadb.createPool({
     database: config.db_name
 });
 
-pool.query("select * from BlogEntries where url='test-heading';",(err,rows,meta) => {
+pool.query = util.promisify(pool.query);
+
+pool.query("select * from BlogEntries where url=(?);",["test-heading"],(err,rows,meta) => {
     if (err){
         console.log(err.message);
     }

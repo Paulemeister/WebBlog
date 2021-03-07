@@ -1,0 +1,22 @@
+.new-blog-form {
+    width: 80%;
+
+    
+    margin: 2em auto 2em auto;
+    padding: 2em 0;
+    
+}
+.new-blog-form * {
+    display: block;
+    margin:   1em auto 1em auto ;
+    width: 80%;
+}
+
+.new-blog-form textarea {
+    height: 20em;
+    padding: 1em;
+}
+.new-blog-form input[type=submit] {
+    margin-top: 2em;
+    width: 10em;
+}

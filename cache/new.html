@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create New Blog Entry </title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/new.css">
+</head>
+
+<body>
+    <div class="navigation">
+
+    <link rel="stylesheet" href="/css/navigation.css">
+
+    <a href="/" class="nav-logo">
+        <img src="/resources/logo.svg" alt="A weird logo">
+    </a>
+
+    <ul class=nav-links>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/info">Info</a>
+        </li>
+        <li>
+            <a href="/test">Test</a>
+        </li>
+        <li>
+            <a href="/new">New</a>
+        </li>
+    </ul>
+</div> 
+    <div>
+        <form method = "POST" action="/new" target=_self class="new-blog-form">
+            <input type="text" name="heading"placeholder="Heading">
+            <textarea name="content" placeholder="Sample Content"></textarea>
+            <input type="submit" name="submit">
+        </form>
+    </div>
+</body>
+
+</html>
