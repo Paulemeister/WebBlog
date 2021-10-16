@@ -1,0 +1,15 @@
+DBNAME = "Paulemeister"
+USER = "webserver"
+PASSWD = "webserverpassword"
+ROOTPSSWD
+
+mariadb -u root -p$ROOTPASSWD -e "CREATE DATABASE ${DBNAME};"
+mariadb -u root -p$ROOTPASSWD -e "CREATE USER ${USER}@localhost IDENTIFIED BY ’${PASSWD}’;"
+mariadb -u root -p$ROOTPASSWD -e "REVOKE ALL PRIVILEGES FROM ${USER};"
+mariadb -u root -p$ROOTPASSWD -e "GRANT ALL ON ${DBNAME}.* TO ${USER};"
+mariadb -D $TestDB -u $USER -p$PASSWD -e "CREATE TABLE BlogEntries (\
+    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,\
+    heading varchar(255) NOT NULL,\
+    url varchar(255) NOT NULL UNIQUE,\
+    content longtext NOT NULL,\
+    author varchar(50) DEFAULT NULL);"
