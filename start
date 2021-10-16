@@ -1,1 +1,5 @@
-nodemon --inspect ./server.js
+if [ $(systemctl is-active mariadb.service) != "active" ]; then
+
+    systemctl start mariadb.service;
+fi
+nodemon --inspect ./expressServer.js;

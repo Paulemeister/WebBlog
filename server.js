@@ -8,7 +8,7 @@ const mariadb = require("mariadb/callback");
 const util = require("util")
 
 const db = require("./mariadb.js");
-config = require("./config.js");
+const config = require("./config.js");
 
 const paths = {
     "": "index.html",

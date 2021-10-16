@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Overview</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <%- include("../blocks/navigation.ejs") %> 
+    <div id="div1"></div>
+    <script>
+        document.body.onload = addBlogEntries;
+
+        function addBlogEntries () {
+            var newDiv = document.createElement("div");
+            var newContent = document.createTextNode("Hi there and greetings!");
+            newDiv.appendChild(newContent); // füge den Textknoten zum neu erstellten div hinzu.
+
+            // füge das neu erstellte Element und seinen Inhalt ins DOM ein
+            var element = document.getElementById("div1");
+            element.appendChild(newDiv);
+        }
+    </script>
+</body>
+</html>

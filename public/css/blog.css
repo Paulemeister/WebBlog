@@ -1,0 +1,28 @@
+@import 'vsColors.css';
+
+.stuff {
+    width: 70%;
+    margin: 2em auto;
+}
+
+.blogEntries {
+    margin: 2em 0em;
+}
+
+.blogEntry {
+    margin: 1.5em 0em;
+    padding: 1em;
+    border: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: var(--VSExplorerTextGrey) ;
+    min-height: 7em;
+
+}
+.blogEntry :is(h1,h2,h3,h4,h5,h6) {
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+.blogEntry .heading {
+    font-size: 2em;
+}
