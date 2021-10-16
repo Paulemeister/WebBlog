@@ -6,12 +6,12 @@ const fs = require("fs");
 const db = require("./mariadb.js");
 const config = require("./config.js");
 const express = require('express');
-const bodyParser = require("body-parser")
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// used to be BodyParser.url... now deprecated
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static('public'))
 app.set("view engine","ejs");
 app.set('view cache', false);
