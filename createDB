@@ -1,13 +1,21 @@
-DBNAME = "Paulemeister"
-USER = "webserver"
-PASSWD = "webserverpassword"
-ROOTPSSWD
+#!/bin/sh
 
-mariadb -u root -p$ROOTPASSWD -e "CREATE DATABASE ${DBNAME};"
-mariadb -u root -p$ROOTPASSWD -e "CREATE USER ${USER}@localhost IDENTIFIED BY ’${PASSWD}’;"
-mariadb -u root -p$ROOTPASSWD -e "REVOKE ALL PRIVILEGES FROM ${USER};"
-mariadb -u root -p$ROOTPASSWD -e "GRANT ALL ON ${DBNAME}.* TO ${USER};"
-mariadb -D $TestDB -u $USER -p$PASSWD -e "CREATE TABLE BlogEntries (\
+DBNAME=Paulemeister
+USER=webserver
+PASSWD=webserverpassword
+ROOTPASSWD=password
+ROOTUSER=root
+
+
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "CREATE DATABASE ${DBNAME};"
+
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "CREATE USER '${USER}'@'localhost' IDENTIFIED BY '${PASSWD}';"
+
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "REVOKE ALL ON *.* FROM ${USER}@localhost;"
+
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "GRANT ALL ON ${DBNAME}.* TO ${USER}@localhost;"
+
+mariadb -D $DBNAME -u $USER -p$PASSWD -e "CREATE TABLE ${DBNAME}.BlogEntries (\
     id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,\
     heading varchar(255) NOT NULL,\
     url varchar(255) NOT NULL UNIQUE,\
