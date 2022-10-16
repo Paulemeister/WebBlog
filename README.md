@@ -4,7 +4,7 @@ Basic Markdown Blog
 ## Installation
 1. install MariaDB
 2. run createDB
-3. run start
+3. run start from the blog directory
 4. profit
 
 For alternative database installations modify the createDB script to make use of your database.
