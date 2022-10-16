@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  blog:
+    image: node:12-alpine
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      PORT: 3000
+      DB_PORT: 3306
+
+  mariadb:
+    image: mariadb:10.10-rc
+    ports:
+      - 3306:3306
+    volumes:
+      - blogDB:/var/lib/mysql
+      - ./createDB:/docker-entrypoint-initdb.d/createDB.sh
+    environment: 
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: Paulemeister
+      MARIADB_HOST: mariadb
+
+
+volumes:
+  blogDB:
+

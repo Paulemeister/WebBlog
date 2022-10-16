@@ -107,11 +107,16 @@ app.get("/blog", (req,res) => {
         if (err ){ 
             console.log(err.message ) ;
         }
-        blogEntries = rows;
-        for (let i=0; i< rows.length;i++){
-            blogEntries[i].description = marked(rows[i].description)
+        if (rows===undefined){
+            blogEntries=[]
         }
-        console.log(rows[0].heading);
+        else{
+            blogEntries = rows;
+        }
+        for (let i=0; i< blogEntries.length;i++){
+            blogEntries[i].description = marked(blogEntries[i].description)
+        }
+        //console.log(rows[0].heading);
         res.render("blog",{blogEntries: blogEntries}, (err,html) => {
             if (err){ 
                 console.log(err.message);
@@ -166,4 +171,4 @@ app.use((error,req, res, next) => {
 });
 
 // starting the server
-app.listen(8080, () => console.log("Started Server on Port "+config.port));
+app.listen(config.port, () => console.log("Started Server on Port "+config.port));

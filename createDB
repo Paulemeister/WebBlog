@@ -9,11 +9,11 @@ ROOTUSER=root
 
 mariadb -u $ROOTUSER -p$ROOTPASSWD -e "CREATE DATABASE ${DBNAME};"
 
-mariadb -u $ROOTUSER -p$ROOTPASSWD -e "CREATE USER '${USER}'@'localhost' IDENTIFIED BY '${PASSWD}';"
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "CREATE USER ${USER} IDENTIFIED BY '${PASSWD}';"
 
-mariadb -u $ROOTUSER -p$ROOTPASSWD -e "REVOKE ALL ON *.* FROM ${USER}@localhost;"
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "REVOKE ALL ON *.* FROM ${USER};"
 
-mariadb -u $ROOTUSER -p$ROOTPASSWD -e "GRANT ALL ON ${DBNAME}.* TO ${USER}@localhost;"
+mariadb -u $ROOTUSER -p$ROOTPASSWD -e "GRANT ALL ON ${DBNAME}.* TO ${USER};"
 
 mariadb -D $DBNAME -u $USER -p$PASSWD -e "CREATE TABLE ${DBNAME}.BlogEntries (\
     id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,\
