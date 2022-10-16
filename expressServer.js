@@ -1,4 +1,4 @@
-const ejs = require("ejs");
+const ejs = require("ejs"); // not needed
 const marked = require("marked");
 const path = require("path");
 const fs = require("fs");
